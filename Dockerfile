@@ -1,7 +1,7 @@
 #FROM  pytorch/pytorch:1.5.1-cuda10.1-cudnn7-runtime
-#FROM pytorch/pytorch:1.3-cuda10.1-cudnn7-devel
+FROM pytorch/pytorch:1.3-cuda10.1-cudnn7-devel
 #FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
-FROM pytorch/pytorch:1.8.0-cuda11.1-cudnn8-devel
+#FROM pytorch/pytorch:1.8.0-cuda11.1-cudnn8-devel
 MAINTAINER alvin
 
 # account info (pwd is not necessary for this config)
@@ -91,7 +91,6 @@ RUN cd ~/ ; mkdir .ssh ;\
 RUN sudo apt-get -y install ipython
 
 RUN python3 -m pip install --user pip==21.0.1;\
-    python3 -m pip install --user numpy==1.19.5;\
     python3 -m pip install --user ipython==7.16.1;\
     python3 -m pip install --user Flask==1.1.2;\
     python3 -m pip install --user opencc-python-reimplemented==0.1.6;\
@@ -99,11 +98,17 @@ RUN python3 -m pip install --user pip==21.0.1;\
     python3 -m pip install --user pycnnum==1.0.1;\
     python3 -m pip install --user gdown==3.12.2;\
     #python3 -m pip install --user tensorflow-gpu==1.14.0;\
-    python3 -m pip install --user torch==1.8.0;\
-    python3 -m pip install --user box2D==2.3.10;\
-    python3 -m pip install --user box2d-py==2.3.8;\
-    python3 -m pip install --user 'gym[Box_2D]';\
+    # NTU 2021 RL sample code package
+    python3 -m pip install --user numpy==1.19.5;\
+    python3 -m pip install --user torch==1.8.1;\
+    python3 -m pip install --user 'gym[box2d]'==0.18.3;\
     python3 -m pip install --user pyvirtualdisplay==2.2;\
+    python3 -m pip install --user opencv-python==4.5.3.56;\
+    python3 -m pip install --user gym==0.18.3;\
+    python3 -m pip install --user 'gym[atari]';\
+    #python3 -m pip install --user scipy==1.2.1;\
+    python3 -m pip install --user tqdm==4.61.2;\
+
     #python3 -m pip install --user http://download.pytorch.org/whl/cu91/torch-0.3.1-cp36-cp36m-linux_x86_64.whl;\
     python3 -m pip install --user lws==1.2.7;\
     python3 -m pip install --user unidecode==1.2.0;\
@@ -115,11 +120,6 @@ RUN python3 -m pip install --user pip==21.0.1;\
     python3 -m pip install --user librosa==0.8.0;\
     python3 -m pip install --user matplotlib==3.3.4;\
     python3 -m pip install --user docopt==0.6.2;\
-    python3 -m pip install --user opencv-python==4.5.3.56;\
-    python3 -m pip install --user gym==0.18.3;\
-    python3 -m pip install --user 'gym[atari]';\
-    #python3 -m pip install --user scipy==1.2.1;\
-    python3 -m pip install --user tqdm==4.61.2;\
     # project git clone
     git clone https://github.com/AlvinYC/${github}.git /home/${user}/${github};
     # fix pycnnum issue, ref: https://github.com/zcold/pycnnum/issues/4
