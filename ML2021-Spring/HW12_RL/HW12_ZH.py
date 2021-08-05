@@ -10,14 +10,14 @@ gym 這個套件由 OpenAI 所提供，是一套用來開發與比較 Reinforcem
 接下來，設置好 virtual display，並引入所有必要的套件。
 '''
 
-from pyvirtualdisplay import Display
-virtual_display = Display(visible=0, size=(1400, 900))
-virtual_display.start()
+#from pyvirtualdisplay import Display
+#virtual_display = Display(visible=0, size=(1400, 900))
+#virtual_display.start()
 
 
 import matplotlib.pyplot as plt
 
-from IPython import display
+#from IPython import display
 
 import numpy as np
 import torch
@@ -127,7 +127,7 @@ Random Agent
 '''
 
 env.reset()
-
+'''
 img = plt.imshow(env.render(mode='rgb_array'))
 
 done = False
@@ -138,7 +138,7 @@ while not done:
     img.set_data(env.render(mode='rgb_array'))
     display.display(plt.gcf())
     display.clear_output(wait=True)
-
+'''
 '''
 Policy Gradient
 現在來搭建一個簡單的 policy network。 我們預設模型的輸入是 8-dim 的 observation，輸出則是離散的四個動作之一：
@@ -270,17 +270,22 @@ for batch in prg_bar:
 訓練過程中，我們持續記下了 avg_total_reward，這個數值代表的是：每次更新 policy network 前，我們讓 agent 玩數個回合（episodes），而這些回合的平均 total rewards 為何。 理論上，若是 agent 一直在進步，則所得到的 avg_total_reward 也會持續上升，直至 250 上下。 若將其畫出來則結果如下：
 '''
 end = time.time()
-#plt.plot(avg_total_rewards)
-#plt.title("Total Rewards")
+plt.figure(1)
+plt.plot(avg_total_rewards)
+plt.title("Total Rewards")
 #plt.show()
 
 '''
 另外，avg_final_reward 代表的是多個回合的平均 final rewards，而 final reward 即是 agent 在單一回合中拿到的最後一個 reward。 如果同學們還記得環境給予登月小艇 reward 的方式，便會知道，不論回合的最後小艇是不幸墜毀、飛出畫面、或是靜止在地面上，都會受到額外地獎勵或處罰。 也因此，final reward 可被用來觀察 agent 的「著地」是否順利等資訊。
 '''
-#plt.plot(avg_final_rewards)
-#plt.title("Final Rewards")
+plt.figure(2)
+plt.plot(avg_final_rewards)
+plt.title("Final Rewards")
+
 #plt.show()
 
 
 # 訓練時間
 print(f"total time is {end-start} sec")
+
+plt.show()
