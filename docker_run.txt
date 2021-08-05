@@ -1,0 +1,12 @@
+docker run -it\
+ --rm\
+ --gpus=all\
+ --shm-size=256m\
+ -p 7788:22\
+ -p 8888:8888\
+ -v /tmp/.X11-unix:/tmp/.X11-unix\
+ -e DISPLAY=unix$DISPLAY\
+ -e GDK_SCALE\
+ -e GDK_DPI_SCALE\
+ --name mlds_rl cei_rl:torch1.8
+
