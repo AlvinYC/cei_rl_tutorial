@@ -134,6 +134,7 @@ RUN python3 -m pip install --user pip==21.0.1;\
 # remote plot matplotlib output (Mac --> dockerhost --> container)
 RUN sudo apt-get install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev -y;\
     sudo apt-get install python3-gi gobject-introspection gir1.2-gtk-3.0 xauth -y;\
+    sudo apt-get install libcanberra-gtk-module libcanberra-gtk3-module -y;\
     python3 -m pip install --user pycairo==1.19.1 --no-use-pep517;\
     python3 -m pip install --user gobject==0.1.0 PyGObject==3.30.5 --no-use-pep517;\
     sudo sed -iE "s/X11Forwarding yes/X11UseLocalhost no\nX11Forwarding yes/" /etc/ssh/sshd_config
