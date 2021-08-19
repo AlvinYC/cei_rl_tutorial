@@ -131,6 +131,13 @@ RUN python3 -m pip install --user pip==21.0.1;\
     #sed -Ei "s/(assert len\(fields\).*)/#\1\n            if len(fields)>6: continue/ " /home/docker/.local/lib/python3.6/site-packages/nnmnkwii/datasets/vctk.py
 
 
+# remote plot matplotlib output (Mac --> dockerhost --> container)
+RUN sudo apt-get install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev -y;\
+    sudo apt-get install python3-gi gobject-introspection gir1.2-gtk-3.0 xauth -y;\
+    python3 -m pip install --user pycairo==1.19.1 --no-use-pep517;\
+    python3 -m pip install --user gobject==0.1.0 PyGObject==3.30.5 --no-use-pep517;\
+    sudo sed -iE "s/X11Forwarding yes/X11UseLocalhost no\nX11Forwarding yes/" /etc/ssh/sshd_config
+
 # run ./utils_thisbuild/project_setup.sh
 COPY ${local_package} /home/${user}/${local_package}
 RUN  sudo chown -R ${user}:${user} /home/${user}/${local_package};\
