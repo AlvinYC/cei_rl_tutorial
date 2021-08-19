@@ -137,7 +137,10 @@ RUN sudo apt-get install libcairo2-dev pkg-config python3-dev libgirepository1.0
     sudo apt-get install libcanberra-gtk-module libcanberra-gtk3-module -y;\
     python3 -m pip install --user pycairo==1.19.1 --no-use-pep517;\
     python3 -m pip install --user gobject==0.1.0 PyGObject==3.30.5 --no-use-pep517;\
-    sudo sed -iE "s/X11Forwarding yes/X11UseLocalhost no\nX11Forwarding yes/" /etc/ssh/sshd_config
+    sudo sed -iE "s/X11Forwarding yes/X11UseLocalhost no\nX11Forwarding yes/" /etc/ssh/sshd_config;\
+    echo "export LANG=en_US.UTF-8" >> /home/${user}/.zshrc;\
+    echo "export LANGUAGE=en_US:en" >> /home/${user}/.zshrc;\
+    echo "export LC_ALL=en_US.UTF-8" >> /home/${user}/.zshrc
 
 # run ./utils_thisbuild/project_setup.sh
 COPY ${local_package} /home/${user}/${local_package}
