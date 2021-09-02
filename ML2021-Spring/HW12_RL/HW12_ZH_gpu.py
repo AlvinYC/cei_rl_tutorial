@@ -106,8 +106,8 @@ agent = PolicyGradientAgent(network)
 agent.network.train()  # 訓練前，先確保 network 處在 training 模式
 
 EPISODE_PER_BATCH = 5  # 每蒐集 5 個 episodes 更新一次 agent
-NUM_BATCH = 400        # 總共更新 400 次
-#NUM_BATCH = 50        # 總共更新 400 次
+#NUM_BATCH = 400        # 總共更新 400 次
+NUM_BATCH = 50        # 總共更新 400 次
 avg_total_rewards, avg_final_rewards = [], []
 prg_bar = tqdm(range(NUM_BATCH))
 
@@ -169,3 +169,39 @@ plt.title("Final Rewards")
 print(f"total time is {end-start} sec")
 
 plt.show()
+
+
+# testing model
+
+fix(env, seed)
+agent.network.eval()  # 測試前先將 network 切換為 evaluation 模式
+NUM_OF_TEST = 5 # Do not revise it !!!!!
+test_total_reward = []
+action_list = []
+for i in range(NUM_OF_TEST):
+  actions = []
+  state = env.reset()
+
+  img = plt.imshow(env.render(mode='rgb_array'))
+
+  total_reward = 0
+
+  done = False
+  while not done:
+      action, _ = agent.sample(state)
+      actions.append(action)
+      state, reward, done, _ = env.step(action)
+
+      total_reward += reward
+
+      img.set_data(env.render(mode='rgb_array'))
+      display.display(plt.gcf())
+      display.clear_output(wait=True)
+  print(total_reward)
+  test_total_reward.append(total_reward)
+
+  action_list.append(actions) #儲存你測試的結果
+  print("length of actions is ", len(actions))
+
+PATH = "Action_List_test.npy" # 可以改成你想取的名字或路徑
+np.save(PATH ,np.array(action_list)) 
