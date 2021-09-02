@@ -118,7 +118,7 @@ RUN python3 -m pip install --user pip==21.0.1;\
     python3 -m pip install --user nltk==3.5;\
     python3 -m pip install --user jupyter==1.0.0;\
     python3 -m pip install --user librosa==0.8.0;\
-    python3 -m pip install --user matplotlib==3.3.4;\
+    python3 -m pip install --user matplotlib==2.2.4;\
     python3 -m pip install --user docopt==0.6.2;\
     # project git clone
     git clone https://github.com/AlvinYC/${github}.git /home/${user}/${github};
